@@ -90,15 +90,30 @@ export const filterTasks = (tasks, filters) => {
 
 /**
  * Format date to readable string
- * @param {string} dateString - ISO date string
+ * @param {string} dateString - Date string in YYYY-MM-DD or ISO format
  * @returns {string} - Formatted date
  */
 export const formatDate = (dateString) => {
   if (!dateString) return '';
   
-  const date = new Date(dateString);
+  // Parse date string (handles both YYYY-MM-DD and ISO format)
+  // Create date at midnight in local timezone to avoid timezone shifts
+  let date;
+  if (dateString.includes('T')) {
+    // ISO format: parse as-is
+    date = new Date(dateString);
+  } else {
+    // YYYY-MM-DD format: create date at midnight local time
+    const [year, month, day] = dateString.split('-').map(Number);
+    date = new Date(year, month - 1, day);
+  }
+  
+  // Get today's date at midnight local time for accurate comparison
   const now = new Date();
-  const diffTime = date - now;
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const taskDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  
+  const diffTime = taskDate - today;
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   if (diffDays === 0) return 'Today';
@@ -121,7 +136,24 @@ export const formatDate = (dateString) => {
  */
 export const isTaskOverdue = (task) => {
   if (!task.dueDate || task.completed) return false;
-  return new Date(task.dueDate) < new Date();
+  
+  // Parse date string (handles both YYYY-MM-DD and ISO format)
+  let dueDate;
+  if (task.dueDate.includes('T')) {
+    // ISO format: parse as-is
+    dueDate = new Date(task.dueDate);
+  } else {
+    // YYYY-MM-DD format: create date at midnight local time
+    const [year, month, day] = task.dueDate.split('-').map(Number);
+    dueDate = new Date(year, month - 1, day);
+  }
+  
+  // Compare with today at midnight local time
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const taskDate = new Date(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate());
+  
+  return taskDate < today;
 };
 
 /**

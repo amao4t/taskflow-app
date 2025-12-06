@@ -29,7 +29,8 @@ const TaskModal = ({ isOpen, onClose, onSave, task = null }) => {
         description: task.description,
         category: task.category,
         priority: task.priority,
-        dueDate: task.dueDate ? task.dueDate.split('T')[0] : '',
+        // Handle both ISO string format and YYYY-MM-DD format
+        dueDate: task.dueDate ? (task.dueDate.includes('T') ? task.dueDate.split('T')[0] : task.dueDate) : '',
       });
     } else {
       // Reset form for new task
@@ -86,10 +87,11 @@ const TaskModal = ({ isOpen, onClose, onSave, task = null }) => {
       return;
     }
 
-    // Convert date to ISO string if provided
+    // Keep dueDate as YYYY-MM-DD string to avoid timezone issues
+    // Input type="date" returns YYYY-MM-DD format, which we'll store as-is
     const taskData = {
       ...formData,
-      dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : '',
+      dueDate: formData.dueDate || '',
     };
 
     onSave(taskData);

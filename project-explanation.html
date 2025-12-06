@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow App - Project Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .toc a:hover {
+            background: #e9ecef;
+        }
+
+        section {
+            margin-bottom: 50px;
+            scroll-margin-top: 20px;
+        }
+
+        section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .file-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .file-section h4 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .file-section p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .file-section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .file-section li {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .flow-diagram {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .flow-diagram ol {
+            margin-left: 20px;
+        }
+
+        .flow-diagram li {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .architecture {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .architecture ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .architecture li {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #0ea5e9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 TaskFlow App</h1>
+            <p>Complete Project Documentation</p>
+        </header>
+
+        <div class="content">
+            <div class="toc">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#config-files">Configuration Files</a></li>
+                    <li><a href="#entry-points">Entry Points</a></li>
+                    <li><a href="#main-component">Main Component</a></li>
+                    <li><a href="#ui-components">UI Components</a></li>
+                    <li><a href="#custom-hooks">Custom Hooks</a></li>
+                    <li><a href="#utilities">Utilities</a></li>
+                    <li><a href="#constants">Constants</a></li>
+                    <li><a href="#styling">Styling Files</a></li>
+                    <li><a href="#workflow">Application Workflow</a></li>
+                    <li><a href="#architecture">Architecture Summary</a></li>
+                </ul>
+            </div>
+
+            <section id="overview">
+                <h2>📖 Overview</h2>
+                <p>
+                    <strong>TaskFlow</strong> is a modern task management application built with React 19 and Vite. 
+                    It provides a clean, intuitive interface for creating, organizing, and tracking tasks with features 
+                    like filtering, sorting, dark mode, and local storage persistence.
+                </p>
+                <p>
+                    The application follows a component-based architecture with custom hooks for state management 
+                    and utility functions for business logic. All data is persisted in the browser's localStorage.
+                </p>
+            </section>
+
+            <section id="config-files">
+                <h2>⚙️ Configuration Files</h2>
+
+                <div class="file-section">
+                    <h4>package.json</h4>
+                    <p><strong>Purpose:</strong> Project configuration and dependency management</p>
+                    <ul>
+                        <li><span class="badge badge-primary">Dependencies:</span> React 19, react-dom, react-icons, uuid</li>
+                        <li><span class="badge badge-info">Dev Dependencies:</span> Vite, Tailwind CSS, ESLint, PostCSS</li>
+                        <li><span class="badge badge-success">Scripts:</span> 
+                            <code>dev</code> - Start development server,
+                            <code>build</code> - Build for production,
+                            <code>lint</code> - Run ESLint,
+                            <code>preview</code> - Preview production build
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>vite.config.js</h4>
+                    <p><strong>Purpose:</strong> Vite build tool configuration</p>
+                    <ul>
+                        <li>Configures React plugin for JSX/TSX support</li>
+                        <li>Sets base path to <code>/taskflow-app/</code> for GitHub Pages deployment</li>
+                        <li>Enables fast HMR (Hot Module Replacement) during development</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>tailwind.config.js</h4>
+                    <p><strong>Purpose:</strong> Tailwind CSS framework configuration</p>
+                    <ul>
+                        <li>Enables <span class="highlight">class-based dark mode</span> (adds/removes 'dark' class on HTML)</li>
+                        <li>Defines custom primary color palette (blue shades)</li>
+                        <li>Configures custom animations: <code>fade-in</code> and <code>slide-up</code></li>
+                        <li>Scans all JS/JSX/TS/TSX files for Tailwind classes</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>eslint.config.js</h4>
+                    <p><strong>Purpose:</strong> Code quality and linting rules</p>
+                    <ul>
+                        <li>Enforces React best practices</li>
+                        <li>Validates React hooks usage</li>
+                        <li>Ensures code consistency across the project</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="entry-points">
+                <h2>🚀 Entry Points</h2>
+
+                <div class="file-section">
+                    <h4>index.html</h4>
+                    <p><strong>Purpose:</strong> HTML template and root element</p>
+                    <ul>
+                        <li>Contains the <code>&lt;div id="root"&gt;</code> where React mounts the application</li>
+                        <li>Links to the main JavaScript bundle generated by Vite</li>
+                        <li>Sets up the basic HTML structure</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/main.jsx</h4>
+                    <p><strong>Purpose:</strong> Application entry point and React initialization</p>
+                    <ul>
+                        <li>Imports React and ReactDOM</li>
+                        <li>Imports the main <code>App</code> component</li>
+                        <li>Imports global CSS styles</li>
+                        <li>Creates React root and renders <code>App</code> wrapped in <code>StrictMode</code></li>
+                        <li><span class="highlight">StrictMode</span> helps identify potential problems during development</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="main-component">
+                <h2>🎯 Main Component</h2>
+
+                <div class="file-section">
+                    <h4>src/App.jsx</h4>
+                    <p><strong>Purpose:</strong> Main application component - orchestrates all features</p>
+                    
+                    <h3>State Management:</h3>
+                    <ul>
+                        <li><strong>tasks:</strong> Array of task objects (persisted in localStorage via <code>useLocalStorage</code>)</li>
+                        <li><strong>isModalOpen:</strong> Controls TaskModal visibility</li>
+                        <li><strong>editingTask:</strong> Currently edited task (null for new tasks)</li>
+                        <li><strong>filters:</strong> Object containing searchQuery, category, priority, and status filters</li>
+                        <li><strong>theme:</strong> Current theme ('light' or 'dark') managed by <code>useTheme</code> hook</li>
+                    </ul>
+
+                    <h3>Key Functions:</h3>
+                    <ul>
+                        <li><strong>handleCreateTask:</strong> Creates new task using <code>createTask</code> utility and adds to state</li>
+                        <li><strong>handleUpdateTask:</strong> Updates existing task using <code>updateTask</code> utility</li>
+                        <li><strong>handleDeleteTask:</strong> Removes task from state (with confirmation dialog)</li>
+                        <li><strong>handleToggleComplete:</strong> Toggles task completion status</li>
+                        <li><strong>handleOpenCreateModal:</strong> Opens modal for creating new task</li>
+                        <li><strong>handleOpenEditModal:</strong> Opens modal for editing existing task</li>
+                        <li><strong>handleSaveTask:</strong> Unified handler that calls create or update based on context</li>
+                    </ul>
+
+                    <h3>Computed Values (useMemo):</h3>
+                    <ul>
+                        <li><strong>filteredAndSortedTasks:</strong> Applies filters and sorts by priority</li>
+                        <li><strong>stats:</strong> Calculates task statistics (total, active, completed, etc.)</li>
+                    </ul>
+
+                    <h3>Component Structure:</h3>
+                    <div class="code-block">
+Header → Search & Theme Toggle
+StatsBar → Task Statistics
+FilterBar → Category, Priority, Status Filters
+TaskList → Grid of TaskCards
+Floating Action Button → Create New Task
+TaskModal → Create/Edit Form (conditionally rendered)
+                    </div>
+                </div>
+            </section>
+
+            <section id="ui-components">
+                <h2>🧩 UI Components</h2>
+
+                <div class="file-section">
+                    <h4>src/components/Header.jsx</h4>
+                    <p><strong>Purpose:</strong> Top navigation bar with branding, search, and theme toggle</p>
+                    <ul>
+                        <li>Displays "TaskFlow" logo with checkmark emoji</li>
+                        <li>Search bar (responsive: hidden on mobile, shown below on small screens)</li>
+                        <li>Theme toggle button (sun/moon icon) that switches between light and dark modes</li>
+                        <li>Sticky header that stays at top when scrolling</li>
+                        <li>Search query is controlled by parent (App.jsx) via props</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/components/FilterBar.jsx</h4>
+                    <p><strong>Purpose:</strong> Filter controls for tasks</p>
+                    <ul>
+                        <li>Three dropdown filters: Category, Priority, Status</li>
+                        <li>Shows count of filtered tasks</li>
+                        <li>"Clear all" button appears when any filter is active</li>
+                        <li>Updates parent's filter state via <code>setFilters</code> callback</li>
+                        <li>Uses constants from <code>taskData.js</code> for filter options</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/components/StatsBar.jsx</h4>
+                    <p><strong>Purpose:</strong> Visual statistics dashboard</p>
+                    <ul>
+                        <li>Displays 5 key metrics: Total, Active, Completed, High Priority, Overdue</li>
+                        <li>Each stat has an icon and color-coded background</li>
+                        <li>Responsive grid layout (2 cols mobile, 3 cols tablet, 5 cols desktop)</li>
+                        <li>Receives stats object from parent (calculated in App.jsx)</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/components/TaskList.jsx</h4>
+                    <p><strong>Purpose:</strong> Container for rendering task cards</p>
+                    <ul>
+                        <li>Responsive grid: 1 column (mobile), 2 columns (tablet), 3 columns (desktop)</li>
+                        <li>Maps through filtered tasks and renders <code>TaskCard</code> for each</li>
+                        <li>Shows empty state with icon and message when no tasks match filters</li>
+                        <li>Passes callbacks (onToggleComplete, onEdit, onDelete) to each TaskCard</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/components/TaskCard.jsx</h4>
+                    <p><strong>Purpose:</strong> Individual task display card</p>
+                    <ul>
+                        <li>Checkbox to toggle completion status</li>
+                        <li>Title and description (description truncated with line-clamp)</li>
+                        <li>Visual indicators:
+                            <ul>
+                                <li>Category badge with icon and color</li>
+                                <li>Priority badge with flag icon</li>
+                                <li>Due date badge (red if overdue)</li>
+                            </ul>
+                        </li>
+                        <li>Edit and Delete action buttons</li>
+                        <li>Left border color indicates category (red if overdue)</li>
+                        <li>Strikethrough styling when task is completed</li>
+                        <li>Uses <code>formatDate</code> and <code>isTaskOverdue</code> utilities</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/components/TaskModal.jsx</h4>
+                    <p><strong>Purpose:</strong> Modal dialog for creating and editing tasks</p>
+                    <ul>
+                        <li>Form fields: Title (required), Description, Category, Priority, Due Date</li>
+                        <li>Form validation:
+                            <ul>
+                                <li>Title is required</li>
+                                <li>Title max 100 characters</li>
+                                <li>Description max 500 characters</li>
+                            </ul>
+                        </li>
+                        <li>Pre-populates form when editing existing task</li>
+                        <li>Resets form when creating new task</li>
+                        <li>Error messages displayed below invalid fields</li>
+                        <li>Converts date input to ISO string format</li>
+                        <li>Backdrop overlay with fade-in animation</li>
+                        <li>Modal slides up with animation</li>
+                        <li>Close button (X) in header</li>
+                        <li>Cancel and Submit buttons</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="custom-hooks">
+                <h2>🪝 Custom Hooks</h2>
+
+                <div class="file-section">
+                    <h4>src/hooks/useLocalStorage.js</h4>
+                    <p><strong>Purpose:</strong> Synchronize React state with browser localStorage</p>
+                    <ul>
+                        <li>API similar to <code>useState</code>: returns <code>[value, setValue]</code></li>
+                        <li>On mount: reads from localStorage or uses initial value</li>
+                        <li>On update: automatically saves to localStorage whenever state changes</li>
+                        <li>Handles JSON serialization/deserialization</li>
+                        <li>Error handling for localStorage quota exceeded or disabled</li>
+                        <li>Used for persisting tasks and theme preference</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/hooks/useTheme.js</h4>
+                    <p><strong>Purpose:</strong> Manage application theme (light/dark mode)</p>
+                    <ul>
+                        <li>Uses <code>useLocalStorage</code> to persist theme preference</li>
+                        <li>Applies theme class to <code>document.documentElement</code> (HTML element)</li>
+                        <li>Removes both 'light' and 'dark' classes before adding current theme</li>
+                        <li>Provides <code>toggleTheme</code> function to switch between themes</li>
+                        <li>Returns <code>{ theme, toggleTheme }</code> object</li>
+                        <li>Theme change triggers Tailwind's dark mode classes throughout the app</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="utilities">
+                <h2>🛠️ Utilities</h2>
+
+                <div class="file-section">
+                    <h4>src/utils/taskHelpers.js</h4>
+                    <p><strong>Purpose:</strong> Business logic and data manipulation functions</p>
+                    
+                    <h3>Functions:</h3>
+                    <ul>
+                        <li><strong>createTask(taskData):</strong>
+                            <ul>
+                                <li>Generates unique ID using UUID v4</li>
+                                <li>Sets default values for missing fields</li>
+                                <li>Adds <code>createdAt</code> and <code>updatedAt</code> timestamps</li>
+                                <li>Returns complete task object</li>
+                            </ul>
+                        </li>
+                        <li><strong>updateTask(task, updates):</strong>
+                            <ul>
+                                <li>Merges updates into existing task object</li>
+                                <li>Updates <code>updatedAt</code> timestamp</li>
+                                <li>Returns updated task</li>
+                            </ul>
+                        </li>
+                        <li><strong>sortTasksByPriority(tasks):</strong>
+                            <ul>
+                                <li>Sorts by priority: High (3) → Medium (2) → Low (1)</li>
+                                <li>Secondary sort: newest first (by createdAt)</li>
+                                <li>Returns new sorted array (doesn't mutate original)</li>
+                            </ul>
+                        </li>
+                        <li><strong>filterTasks(tasks, filters):</strong>
+                            <ul>
+                                <li>Filters by search query (title or description, case-insensitive)</li>
+                                <li>Filters by category (if not 'all')</li>
+                                <li>Filters by priority (if not 'all')</li>
+                                <li>Filters by status (all/active/completed)</li>
+                                <li>Returns filtered array</li>
+                            </ul>
+                        </li>
+                        <li><strong>formatDate(dateString):</strong>
+                            <ul>
+                                <li>Formats ISO date string to human-readable format</li>
+                                <li>Returns: "Today", "Tomorrow", "Yesterday", "X days ago", "In X days", or formatted date</li>
+                                <li>Shows year only if different from current year</li>
+                            </ul>
+                        </li>
+                        <li><strong>isTaskOverdue(task):</strong>
+                            <ul>
+                                <li>Checks if task due date has passed</li>
+                                <li>Returns false if no due date or task is completed</li>
+                                <li>Returns true if due date is in the past</li>
+                            </ul>
+                        </li>
+                        <li><strong>getTaskStats(tasks):</strong>
+                            <ul>
+                                <li>Calculates statistics from task array</li>
+                                <li>Returns object with: total, completed, active, overdue, highPriority counts</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="constants">
+                <h2>📋 Constants</h2>
+
+                <div class="file-section">
+                    <h4>src/constants/taskData.js</h4>
+                    <p><strong>Purpose:</strong> Static data and configuration constants</p>
+                    
+                    <h3>Data Structures:</h3>
+                    <ul>
+                        <li><strong>CATEGORIES:</strong> Array of category objects
+                            <ul>
+                                <li>Each has: id, name, color, icon (emoji)</li>
+                                <li>Categories: All Tasks, Work, Personal, Study, Health, Shopping</li>
+                            </ul>
+                        </li>
+                        <li><strong>PRIORITIES:</strong> Array of priority objects
+                            <ul>
+                                <li>Each has: id, name, color, value (numeric for sorting)</li>
+                                <li>Priorities: High (3), Medium (2), Low (1)</li>
+                            </ul>
+                        </li>
+                        <li><strong>FILTER_OPTIONS:</strong> Object with status filter constants
+                            <ul>
+                                <li>ALL: 'all', ACTIVE: 'active', COMPLETED: 'completed'</li>
+                            </ul>
+                        </li>
+                        <li><strong>COLOR_CLASSES:</strong> Mapping of color names to Tailwind CSS classes
+                            <ul>
+                                <li>For each color (blue, green, purple, red, yellow, gray):</li>
+                                <li>Provides: bg (background), text, border classes</li>
+                                <li>Includes dark mode variants</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Helper Functions:</h3>
+                    <ul>
+                        <li><strong>getCategoryById(id):</strong> Finds category by ID, returns default if not found</li>
+                        <li><strong>getPriorityById(id):</strong> Finds priority by ID, returns default (medium) if not found</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="styling">
+                <h2>🎨 Styling Files</h2>
+
+                <div class="file-section">
+                    <h4>src/index.css</h4>
+                    <p><strong>Purpose:</strong> Global styles and Tailwind CSS setup</p>
+                    <ul>
+                        <li>Imports Tailwind directives: <code>@tailwind base</code>, <code>@tailwind components</code>, <code>@tailwind utilities</code></li>
+                        <li>Custom scrollbar styles (thin, styled for light/dark mode)</li>
+                        <li>Base body styles with dark mode support</li>
+                        <li>Custom shimmer animation (currently unused but available)</li>
+                    </ul>
+                </div>
+
+                <div class="file-section">
+                    <h4>src/App.css</h4>
+                    <p><strong>Purpose:</strong> Component-specific styles (minimal usage)</p>
+                    <ul>
+                        <li>Contains default Vite template styles</li>
+                        <li>Mostly unused as Tailwind CSS handles styling</li>
+                        <li>Could be removed or used for component-specific overrides</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="workflow">
+                <h2>🔄 Application Workflow</h2>
+
+                <div class="flow-diagram">
+                    <h3>Initialization Flow:</h3>
+                    <ol>
+                        <li><strong>Browser loads</strong> <code>index.html</code></li>
+                        <li><strong>Vite loads</strong> <code>main.jsx</code> bundle</li>
+                        <li><strong>React mounts</strong> <code>App</code> component to <code>#root</code></li>
+                        <li><strong>App.jsx initializes:</strong>
+                            <ul>
+                                <li>Loads tasks from localStorage (via <code>useLocalStorage</code>)</li>
+                                <li>Loads theme preference from localStorage (via <code>useTheme</code>)</li>
+                                <li>Applies theme class to HTML element</li>
+                                <li>Initializes filter state</li>
+                            </ul>
+                        </li>
+                        <li><strong>Components render:</strong> Header, StatsBar, FilterBar, TaskList</li>
+                    </ol>
+                </div>
+
+                <div class="flow-diagram">
+                    <h3>User Interaction Flows:</h3>
+                    
+                    <h4>Creating a Task:</h4>
+                    <ol>
+                        <li>User clicks floating action button (FAB)</li>
+                        <li><code>handleOpenCreateModal</code> sets <code>editingTask = null</code> and <code>isModalOpen = true</code></li>
+                        <li>TaskModal renders with empty form</li>
+                        <li>User fills form and submits</li>
+                        <li>Form validation runs</li>
+                        <li>If valid: <code>handleSaveTask</code> → <code>handleCreateTask</code> → <code>createTask</code> utility</li>
+                        <li>New task added to state → automatically saved to localStorage</li>
+                        <li>Modal closes, TaskList updates with new task</li>
+                    </ol>
+
+                    <h4>Editing a Task:</h4>
+                    <ol>
+                        <li>User clicks Edit button on TaskCard</li>
+                        <li><code>handleOpenEditModal</code> receives task object, sets <code>editingTask</code> and opens modal</li>
+                        <li>TaskModal populates form with task data</li>
+                        <li>User modifies and submits</li>
+                        <li><code>handleSaveTask</code> → <code>handleUpdateTask</code> → <code>updateTask</code> utility</li>
+                        <li>Task updated in state → saved to localStorage</li>
+                        <li>UI updates to show changes</li>
+                    </ol>
+
+                    <h4>Filtering Tasks:</h4>
+                    <ol>
+                        <li>User changes filter in FilterBar (category, priority, or status)</li>
+                        <li>FilterBar calls <code>setFilters</code> with new value</li>
+                        <li>App's filter state updates</li>
+                        <li><code>filteredAndSortedTasks</code> useMemo recalculates</li>
+                        <li><code>filterTasks</code> utility filters task array</li>
+                        <li><code>sortTasksByPriority</code> sorts filtered results</li>
+                        <li>TaskList re-renders with filtered/sorted tasks</li>
+                    </ol>
+
+                    <h4>Toggling Theme:</h4>
+                    <ol>
+                        <li>User clicks theme toggle button in Header</li>
+                        <li><code>toggleTheme</code> from <code>useTheme</code> hook executes</li>
+                        <li>Theme state toggles ('light' ↔ 'dark')</li>
+                        <li>Theme saved to localStorage</li>
+                        <li><code>useEffect</code> in <code>useTheme</code> updates HTML class</li>
+                        <li>Tailwind dark mode classes activate throughout app</li>
+                        <li>All components re-render with new theme colors</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>🏗️ Architecture Summary</h2>
+
+                <div class="architecture">
+                    <h3>Technology Stack:</h3>
+                    <ul>
+                        <li><strong>Framework:</strong> React 19 (with Hooks)</li>
+                        <li><strong>Build Tool:</strong> Vite (fast HMR, optimized builds)</li>
+                        <li><strong>Styling:</strong> Tailwind CSS (utility-first, dark mode support)</li>
+                        <li><strong>Icons:</strong> react-icons (Feather Icons)</li>
+                        <li><strong>ID Generation:</strong> uuid (v4)</li>
+                        <li><strong>Storage:</strong> Browser localStorage (via custom hook)</li>
+                        <li><strong>Code Quality:</strong> ESLint</li>
+                    </ul>
+
+                    <h3>Architecture Patterns:</h3>
+                    <ul>
+                        <li><strong>Component-Based:</strong> Modular, reusable UI components</li>
+                        <li><strong>Custom Hooks:</strong> Reusable stateful logic (localStorage, theme)</li>
+                        <li><strong>Utility Functions:</strong> Pure functions for business logic</li>
+                        <li><strong>Constants:</strong> Centralized configuration data</li>
+                        <li><strong>Lifting State Up:</strong> App.jsx manages all shared state</li>
+                        <li><strong>Props Drilling:</strong> State and callbacks passed down via props</li>
+                    </ul>
+
+                    <h3>Data Flow:</h3>
+                    <ul>
+                        <li><strong>Unidirectional:</strong> Data flows down (props), events flow up (callbacks)</li>
+                        <li><strong>State Management:</strong> React useState + useLocalStorage for persistence</li>
+                        <li><strong>Computed Values:</strong> useMemo for expensive calculations (filtering, stats)</li>
+                        <li><strong>Side Effects:</strong> useEffect for theme application and localStorage sync</li>
+                    </ul>
+
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>✅ CRUD operations (Create, Read, Update, Delete tasks)</li>
+                        <li>✅ Search functionality (title and description)</li>
+                        <li>✅ Multi-filter system (category, priority, status)</li>
+                        <li>✅ Priority-based sorting</li>
+                        <li>✅ Task statistics dashboard</li>
+                        <li>✅ Dark mode with persistence</li>
+                        <li>✅ Responsive design (mobile, tablet, desktop)</li>
+                        <li>✅ Form validation</li>
+                        <li>✅ Overdue task detection</li>
+                        <li>✅ Local storage persistence</li>
+                        <li>✅ Smooth animations and transitions</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>TaskFlow App Documentation | Generated for CPSC 349 Final Project</p>
+        </footer>
+    </div>
+</body>
+</html>
